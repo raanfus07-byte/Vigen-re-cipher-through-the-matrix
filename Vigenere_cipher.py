@@ -1,11 +1,21 @@
+import time
+
 def start(arr, arr2, key, mes, a):
     mes2 = []
     key2 = []
     for i in range(len(mes)):
-        mes2.append(arr2.index(mes[i]))
+        if mes[i] in arr2:
+            mes2.append(arr2.index(mes[i]))
+        else:
+            print(f'символа {mes[i]} нет, он заменен на пробел, раздел 0')
+            mes2.append(32)
 
     for i in range(len(key)):
-        key2.append(arr2.index(key[i]))
+        if key[i] in arr2:
+            key2.append(arr2.index(key[i]))
+        else:
+            print(f'символа {key[i]} нет, он заменен на пробел, раздел 1')
+            key2.append(32)
 
     while True:
         if len(mes2) > len(key2):
@@ -88,14 +98,14 @@ def math_encode(key, mes):
         mes3 += arr2[mes2[x]]
     print(mes3)
 
-arr2 = 'абвгдежзийклмнопрстуфхцчшщыьэюя 1234567890!?,.(){}[]:;№#$-_+=*&^%@"№/|`~<>'
+arr2 = 'абвгдежзийклмнопрстуфхцчшщъыьэюя 1234567890!?,.(){}[]:;№#$-—_+=*&^%@"№/|`~<>«»'
 N = len(arr2)
 arr = [[(x + y) % N for x in range(N)] for y in range(N)]
 
 print('---'*10)
 print('Внимание! шифровка специфична, и не может взаимодействовать с онлайн шифровщиками Виженера, '
-      '\nонo сделано настолько криво что сообщения могут быть расшифрованы только подобным кодом'
-      f'\nдоступный ряд символов(шифруется все): {arr2}')
+      '\nшифруется любые символы что доступны в ряде ниже, все что не указанно в ряде то заменяется на пробел автоматически'
+      f'\nдоступный ряд символов: {arr2}')
 print('---'*10)
 
 while True:
@@ -122,3 +132,4 @@ while True:
         break
     else:
         print('неверная команда')
+        time.sleep(1.5)
